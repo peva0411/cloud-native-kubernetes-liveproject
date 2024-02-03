@@ -17,7 +17,11 @@ spec:
     spec:
       containers:
       - name: payment
-        image: sns-payment:latest
+        image: sns-payments-liveness:v2
+        livenessProbe:
+          httpGet:
+            path: api/health/liveness
+            port: 3000
         resources: 
           requests:
             cpu: 500m 
