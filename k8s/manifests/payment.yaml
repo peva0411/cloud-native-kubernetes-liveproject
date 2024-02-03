@@ -18,6 +18,10 @@ spec:
       containers:
       - name: payment
         image: sns-payment:latest
+        resources: 
+          requests:
+            cpu: 500m 
+            memory: 10Mi
         ports:
         - containerPort: 3000
         env:

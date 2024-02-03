@@ -17,6 +17,10 @@ spec:
     spec:
       containers:
       - name: redis
+        resources: 
+          requests:
+            cpu: 100m 
+            memory: 20Mi
         image: redis:6.0.4-alpine
         ports:
         - containerPort: 6379
