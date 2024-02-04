@@ -17,10 +17,14 @@ spec:
     spec:
       containers:
       - name: payment
-        image: sns-payments-liveness:v2
+        image: sns-payments-liveness:v3
         livenessProbe:
           httpGet:
             path: api/health/liveness
+            port: 3000
+        readinessProbe:
+          httpGet:
+            path: api/health/readiness
             port: 3000
         resources: 
           requests:
