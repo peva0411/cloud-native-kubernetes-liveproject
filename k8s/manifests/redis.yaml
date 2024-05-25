@@ -36,7 +36,7 @@ spec:
       volumes:
       - name: conf
         secret:
-          secretName: redis-conf
+          secretName: redis-config
 ---
 apiVersion: v1
 kind: Service

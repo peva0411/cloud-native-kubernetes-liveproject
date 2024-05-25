@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: payment
-        image: sns-payments-liveness:v3
+        image: peva0411/sns-payment:latest
         livenessProbe:
           httpGet:
             path: api/health/liveness
@@ -40,9 +40,9 @@ spec:
           - name: REDIS_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: redis-conf
+                name: redis-config
                 key: redis_password
-        imagePullPolicy: "Never"
+        imagePullPolicy: "IfNotPresent"
 ---
 apiVersion: v1
 kind: Service
