@@ -35,10 +35,10 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_CONTAINER_REGISTRY: "your-azure-container-registry"
-  CONTAINER_NAME: "your-container-name"
-  RESOURCE_GROUP: "your-resource-group"
-  CLUSTER_NAME: "your-cluster-name"
+  AZURE_CONTAINER_REGISTRY: pecontainers
+  CONTAINER_NAME: sns-payment
+  RESOURCE_GROUP: k8s-test
+  CLUSTER_NAME: test-cluster
   DEPLOYMENT_MANIFEST_PATH: /k8s/manifests/payment.yaml
 
 jobs:
