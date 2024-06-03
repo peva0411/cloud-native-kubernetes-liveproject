@@ -59,7 +59,7 @@ jobs:
           creds: '${{ secrets.AZURE_CREDENTIALS }}'
 
       # Builds and pushes an image up to your Azure Container Registry
-      - name: Build and push image to ACR
+      - name: Build and push payments image to ACR
         run: |
           az acr build --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.RESOURCE_GROUP }} ./payments/
 
@@ -94,6 +94,15 @@ jobs:
           cluster-name: ${{ env.CLUSTER_NAME }}
           admin: 'false'
           use-kubelogin: 'true'
+          
+      #Runs Kustomize to create manifest 
+      - name: Bake deployment
+        uses: azure/k8s-bake@v2
+        with:
+          renderEngine: "kustomize"
+          kustomizationPath: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
+          kubectl-version: latest
+        id: bake
 
       # Deploys application based on given manifest file
       - name: Deploys application
@@ -101,6 +110,6 @@ jobs:
         with:
           action: deploy
           namespace: sns
-          manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
+          manifests: ${{ steps.bake.outputs.manifestsBundle }}
           images: |
             ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }}
