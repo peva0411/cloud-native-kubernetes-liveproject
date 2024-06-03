@@ -39,7 +39,7 @@ env:
   CONTAINER_NAME: sns-payment
   RESOURCE_GROUP: k8s-test
   CLUSTER_NAME: test-cluster
-  DEPLOYMENT_MANIFEST_PATH: ./k8s/manifests/payment.yaml
+  DEPLOYMENT_MANIFEST_PATH: ./k8s/manifests
 
 jobs:
   buildImage:
