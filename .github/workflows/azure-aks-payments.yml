@@ -95,6 +95,15 @@ jobs:
           admin: 'false'
           use-kubelogin: 'true'
           
+      - name: Create Secrets
+        uses: azure/k8s-actions/k8s-create-secret@master
+        with:
+          namespace: 'sns'
+          secret-type: 'generic'
+          secret-name: redis-conf
+          arguments: --from-literal=redis.conf=${{ secrets.REDIS_CONF }} --from-literal=redis_password=${{ secrets.REDIS_PASSWORD }}
+          
+          
       #Runs Kustomize to create manifest 
       - name: Bake deployment
         uses: azure/k8s-bake@v2
